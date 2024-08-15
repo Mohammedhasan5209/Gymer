@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Healthy Diet</title>
+    <link rel="icon" href="../logo.png">
+    <style>
+        /* Color Palette */
+        :root {
+            --primary-color: #444; /* Dark Gray */
+            --secondary-color: #555; /* Medium Gray */
+            --accent-color: #777; /* Lighter Gray */
+            --background-color: #f4f4f4; /* Very Light Gray */
+            --text-color: #333; /* Slightly Darker Gray */
+            --light-text-color: #fff; /* White */
+            --hover-color: #666; /* Hover Gray */
+        }
+
+        /* Base Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+        }
+
+        header {
+            background: var(--primary-color);
+            color: var(--light-text-color);
+            padding: 20px 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-weight: 500;
+        }
+
+        nav {
+            background: var(--secondary-color);
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--light-text-color);
+            padding: 15px 20px;
+            text-decoration: none;
+            transition: background 0.3s;
+            border-radius: 5px;
+            margin: 5px;
+        }
+
+        nav a:hover {
+            background: var(--hover-color);
+        }
+
+        .container {
+            width: 90%;
+            margin: auto;
+            overflow: hidden;
+            padding: 20px 0;
+        }
+
+        form {
+            background: var(--light-text-color);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            max-width: 500px;
+            margin: 20px auto;
+            transition: transform 0.3s;
+        }
+
+        form:hover {
+            transform: scale(1.02);
+        }
+
+        form input, form select, form button {
+            width: 100%;
+            padding: 12px;
+            margin: 12px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        form button {
+            background-color: var(--secondary-color);
+            color: var(--light-text-color);
+            border: none;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: var(--hover-color);
+        }
+
+        .meal-plan {
+            background-color: var(--light-text-color);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            transition: transform 0.3s;
+            max-width: 400px;
+            margin: 10px auto;
+        }
+
+        .meal-plan:hover {
+            transform: scale(1.02);
+        }
+
+        .meal-plan h3 {
+            margin-top: 0;
+            color: var(--accent-color);
+            font-weight: 500;
+        }
+
+        .meal-plan p {
+            margin: 5px 0;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .meal-plan, form {
+                width: 90%;
+            }
+        }
+
+        @media (max-width: 500px) {
+            nav a {
+                padding: 10px;
+            }
+
+            form input, form button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Personalized Healthy Diet Plan</h1>
+    </header>
+
+    <nav>
+        <a href="home">Home</a>
+        <a href="Training Program">Training Program</a>
+        <a href="Healthy_diet">Healthy Diet</a>
+        <a href="Progress">Progress</a>
+    </nav>
+
+    <div class="container">
+        <form id="dietForm">
+            <input type="number" id="budget" name="budget" placeholder="Daily Budget ($)" min="0" max="200" required>
+            <input type="text" id="allergies" name="allergies" placeholder="List of Food Allergies (separated by commas)" type="text">
+            <input type="number" id="mealCount" name="mealCount" placeholder="Number of Meals (optional)" min="1">
+            <button type="submit">Generate Meal Plan</button>
+        </form>
+
+        <div id="mealPlan"></div>
+    </div>
+
+    <script>
+        const meals = [
+            // Balanced meals with protein, carbohydrates, legumes, and fruit
+            { name: "Grilled Chicken Salad", ingredients: ["chicken", "lettuce", "tomatoes", "cucumbers"], cost: 8 },
+            { name: "Quinoa and Black Beans", ingredients: ["quinoa", "black beans", "corn", "bell peppers"], cost: 5 },
+            { name: "Oatmeal with Fruits", ingredients: ["oats", "milk", "banana", "blueberries"], cost: 3 },
+            { name: "Turkey Sandwich", ingredients: ["whole wheat bread", "turkey", "cheese", "lettuce"], cost: 4 },
+            { name: "Stir-fried Tofu and Vegetables", ingredients: ["tofu", "broccoli", "carrots", "soy sauce"], cost: 6 },
+            { name: "Pasta Primavera", ingredients: ["pasta", "zucchini", "tomatoes", "parmesan"], cost: 7 },
+            { name: "Fruit Smoothie", ingredients: ["banana", "strawberries", "yogurt", "honey"], cost: 2 },
+            { name: "Veggie Stir-fry", ingredients: ["broccoli", "carrots", "bell peppers", "soy sauce"], cost: 4 },
+            { name: "Chicken Burrito Bowl", ingredients: ["chicken", "rice", "beans", "salsa"], cost: 9 },
+            { name: "Avocado Toast", ingredients: ["avocado", "whole wheat bread", "tomato"], cost: 3 },
+            { name: "Greek Yogurt with Honey", ingredients: ["greek yogurt", "honey", "walnuts"], cost: 4 },
+            { name: "Salmon and Asparagus", ingredients: ["salmon", "asparagus", "lemon"], cost: 10 },
+            { name: "Chicken Caesar Salad", ingredients: ["chicken", "romaine lettuce", "parmesan", "croutons"], cost: 7 },
+            { name: "Hummus and Veggie Wrap", ingredients: ["hummus", "carrots", "lettuce", "tortilla"], cost: 5 },
+            { name: "Egg Salad Sandwich", ingredients: ["eggs", "mayo", "whole wheat bread"], cost: 3 },
+            { name: "Spaghetti Bolognese", ingredients: ["spaghetti", "ground beef", "tomato sauce"], cost: 8 },
+            { name: "Chia Pudding", ingredients: ["chia seeds", "almond milk", "berries"], cost: 4 },
+            { name: "Vegetable Soup", ingredients: ["carrots", "celery", "potatoes", "broth"], cost: 3 },
+            { name: "Cottage Cheese and Fruit", ingredients: ["cottage cheese", "pineapple", "peach"], cost: 3 },
+            { name: "Minestrone Soup", ingredients: ["pasta", "beans", "tomato", "spinach"], cost: 5 },
+            { name: "Beef Stir-fry", ingredients: ["beef", "broccoli", "bell peppers", "soy sauce"], cost: 9 },
+            { name: "Chicken Fajitas", ingredients: ["chicken", "tortillas", "bell peppers", "onions"], cost: 8 },
+            { name: "Pancakes with Berries", ingredients: ["flour", "milk", "eggs", "blueberries"], cost: 4 },
+            { name: "Caprese Salad", ingredients: ["tomato", "mozzarella", "basil", "balsamic vinegar"], cost: 6 },
+            { name: "Tofu Scramble", ingredients: ["tofu", "spinach", "tomatoes", "bell peppers"], cost: 5 },
+            { name: "Grilled Cheese Sandwich", ingredients: ["bread", "cheese", "butter"], cost: 3 },
+            { name: "Baked Chicken with Vegetables", ingredients: ["chicken", "potatoes", "carrots"], cost: 7 },
+            { name: "Lentil Soup", ingredients: ["lentils", "carrots", "celery", "tomato"], cost: 3 },
+            { name: "Egg and Spinach Omelette", ingredients: ["eggs", "spinach", "cheese"], cost: 4 },
+            { name: "Shrimp Stir-fry", ingredients: ["shrimp", "rice", "bell peppers", "soy sauce"], cost: 10 },
+            { name: "Couscous Salad", ingredients: ["couscous", "cucumber", "tomatoes", "feta"], cost: 5 },
+            { name: "Chicken and Rice Soup", ingredients: ["chicken", "rice", "carrots", "broth"], cost: 4 },
+            { name: "Beef Tacos", ingredients: ["ground beef", "tortillas", "lettuce", "cheese"], cost: 7 },
+            { name: "Greek Salad", ingredients: ["lettuce", "olives", "feta", "cucumbers"], cost: 4 },
+            { name: "Stuffed Bell Peppers", ingredients: ["bell peppers", "ground turkey", "rice", "cheese"], cost: 7 },
+            { name: "Banana Pancakes", ingredients: ["banana", "flour", "eggs"], cost: 3 },
+            { name: "Zucchini Noodles", ingredients: ["zucchini", "tomato sauce", "parmesan"], cost: 4 },
+            { name: "Fish Tacos", ingredients: ["white fish", "tortillas", "cabbage", "salsa"], cost: 8 },
+            { name: "Beet Salad", ingredients: ["beets", "goat cheese", "walnuts"], cost: 5 },
+            { name: "Tomato Basil Soup", ingredients: ["tomatoes", "basil", "cream"], cost: 3 },
+            { name: "Spinach and Feta Wrap", ingredients: ["spinach", "feta", "tortilla"], cost: 4 },
+            { name: "Chicken Alfredo", ingredients: ["pasta", "chicken", "alfredo sauce"], cost: 9 },
+            { name: "Eggplant Parmesan", ingredients: ["eggplant", "tomato sauce", "mozzarella"], cost: 7 },
+            { name: "Tuna Salad", ingredients: ["tuna", "lettuce", "tomatoes", "onion"], cost: 5 },
+            { name: "Vegetable Lasagna", ingredients: ["lasagna noodles", "zucchini", "tomato sauce", "cheese"], cost: 8 },
+            { name: "Sweet Potato and Black Bean Tacos", ingredients: ["sweet potato", "black beans", "tortillas"], cost: 5 },
+            { name: "Broccoli Cheddar Soup", ingredients: ["broccoli", "cheddar cheese", "cream"], cost: 5 },
+            { name: "Grilled Shrimp Skewers", ingredients: ["shrimp", "bell peppers", "zucchini"], cost: 10 },
+            { name: "French Toast", ingredients: ["bread", "eggs", "milk", "cinnamon"], cost: 4 },
+            { name: "Chicken Parmesan", ingredients: ["chicken", "tomato sauce", "mozzarella"], cost: 9 },
+            { name: "Roasted Vegetable Quinoa", ingredients: ["quinoa", "carrots", "zucchini", "peppers"], cost: 5 },
+            { name: "Lamb Chops with Mint Sauce", ingredients: ["lamb", "mint", "potatoes"], cost: 12 },
+            { name: "Chicken Stir-fry", ingredients: ["chicken", "broccoli", "carrots", "soy sauce"], cost: 7 },
+            { name: "Almond Butter and Banana Toast", ingredients: ["almond butter", "banana", "whole wheat bread"], cost: 3 },
+            { name: "Roasted Cauliflower Tacos", ingredients: ["cauliflower", "tortillas", "avocado", "salsa"], cost: 4 },
+            { name: "Salmon with Quinoa and Spinach", ingredients: ["salmon", "quinoa", "spinach"], cost: 10 },
+            { name: "Chickpea Salad", ingredients: ["chickpeas", "cucumbers", "tomatoes", "feta"], cost: 5 },
+            { name: "Eggs Benedict", ingredients: ["eggs", "english muffin", "ham", "hollandaise"], cost: 8 },
+            { name: "Chicken Enchiladas", ingredients: ["chicken", "tortillas", "cheese", "enchilada sauce"], cost: 7 },
+            { name: "Vegetable Paella", ingredients: ["rice", "peas", "bell peppers", "saffron"], cost: 6 },
+            { name: "Pumpkin Soup", ingredients: ["pumpkin", "cream", "spices"], cost: 3 },
+            { name: "Beef and Broccoli", ingredients: ["beef", "broccoli", "soy sauce", "garlic"], cost: 8 },
+            { name: "BBQ Chicken Salad", ingredients: ["chicken", "lettuce", "corn", "bbq sauce"], cost: 7 },
+            { name: "Spinach Artichoke Dip with Pita", ingredients: ["spinach", "artichokes", "cream cheese", "pita"], cost: 5 },
+            { name: "Shepherd’s Pie", ingredients: ["ground beef", "potatoes", "carrots", "peas"], cost: 7 },
+            { name: "Chicken and Waffles", ingredients: ["chicken", "waffles", "maple syrup"], cost: 8 },
+            { name: "Shakshuka", ingredients: ["eggs", "tomatoes", "bell peppers", "spices"], cost: 5 },
+            { name: "Fish and Chips", ingredients: ["white fish", "potatoes", "tartar sauce"], cost: 9 },
+            { name: "Chicken Quesadillas", ingredients: ["chicken", "tortillas", "cheese", "salsa"], cost: 6 },
+            { name: "Ratatouille", ingredients: ["zucchini", "eggplant", "tomatoes", "herbs"], cost: 5 },
+            { name: "Falafel Wrap", ingredients: ["falafel", "pita", "lettuce", "tomatoes"], cost: 5 },
+            { name: "Steak and Potatoes", ingredients: ["steak", "potatoes", "butter"], cost: 12 },
+            { name: "Chicken Noodle Soup", ingredients: ["chicken", "noodles", "carrots", "broth"], cost: 4 },
+            { name: "Eggplant Rollatini", ingredients: ["eggplant", "ricotta", "tomato sauce"], cost: 7 },
+            { name: "Crab Cakes", ingredients: ["crab", "breadcrumbs", "mayo", "mustard"], cost: 9 },
+            { name: "Vegetable Curry", ingredients: ["coconut milk", "potatoes", "carrots", "peas"], cost: 5 },
+            { name: "Grilled Steak Salad", ingredients: ["steak", "lettuce", "blue cheese", "onions"], cost: 10 },
+            { name: "Banana Smoothie", ingredients: ["banana", "milk", "honey"], cost: 2 },
+            { name: "Mushroom Risotto", ingredients: ["mushrooms", "rice", "parmesan"], cost: 7 },
+            { name: "Tofu Tacos", ingredients: ["tofu", "tortillas", "salsa", "lettuce"], cost: 5 },
+            { name: "Chicken Pesto Pasta", ingredients: ["pasta", "chicken", "pesto sauce"], cost: 8 },
+            { name: "Bruschetta", ingredients: ["tomatoes", "basil", "garlic", "baguette"], cost: 4 },
+            { name: "Creamy Tomato Pasta", ingredients: ["pasta", "tomato sauce", "cream", "parmesan"], cost: 6 },
+            { name: "Chicken Shawarma", ingredients: ["chicken", "pita", "lettuce", "tomato", "yogurt sauce"], cost: 7 },
+            { name: "Fruit Salad", ingredients: ["strawberries", "blueberries", "kiwi", "melon"], cost: 4 },
+            { name: "Butternut Squash Soup", ingredients: ["butternut squash", "onions", "garlic", "broth"], cost: 4 },
+            { name: "Chicken Gyro", ingredients: ["chicken", "pita", "tzatziki", "lettuce"], cost: 6 },
+            { name: "Broccoli Salad", ingredients: ["broccoli", "raisins", "bacon", "sunflower seeds"], cost: 5 },
+            { name: "Tomato Cucumber Salad", ingredients: ["tomatoes", "cucumber", "feta", "olive oil"], cost: 4 },
+            { name: "Grilled Chicken and Zucchini", ingredients: ["chicken", "zucchini", "lemon"], cost: 8 },
+            { name: "Beef Chili", ingredients: ["ground beef", "beans", "tomato", "spices"], cost: 7 }
+        ];
+
+        const dietForm = document.getElementById('dietForm');
+        const mealPlanDiv = document.getElementById('mealPlan');
+
+        dietForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const budget = parseFloat(document.getElementById('budget').value);
+            const allergiesInput = document.getElementById('allergies').value;
+            const allergies = allergiesInput ? allergiesInput.split(',').map(a => a.trim().toLowerCase()) : [];
+            const mealCount = parseInt(document.getElementById('mealCount').value) || 7;
+
+            const filteredMeals = meals.filter(meal => {
+                return !meal.ingredients.some(ingredient => allergies.includes(ingredient.toLowerCase()));
+            });
+
+            const dailyMealPlan = [];
+            let remainingBudget = budget;
+
+            // Randomly select meals until the budget is exhausted or meal count is reached
+            while (dailyMealPlan.length < mealCount && remainingBudget > 0) {
+                const randomMeal = filteredMeals[Math.floor(Math.random() * filteredMeals.length)];
+                if (randomMeal.cost <= remainingBudget) {
+                    dailyMealPlan.push(randomMeal);
+                    remainingBudget -= randomMeal.cost;
+                }
+            }
+
+            mealPlanDiv.innerHTML = '';
+
+            if (dailyMealPlan.length === 0) {
+                mealPlanDiv.innerHTML = '<p>Sorry, with the given budget and allergies, we couldn\'t generate a meal plan.</p>';
+                return;
+            }
+
+            dailyMealPlan.forEach(function(meal, index) {
+                const mealDiv = document.createElement('div');
+                mealDiv.className = 'meal-plan';
+
+                const mealTitle = document.createElement('h3');
+                mealTitle.textContent = 'Meal ' + (index + 1) + ': ' + meal.name;
+
+                const ingredientsList = document.createElement('p');
+                ingredientsList.textContent = 'Ingredients: ' + meal.ingredients.join(', ');
+
+                const costInfo = document.createElement('p');
+                costInfo.textContent = 'Cost: $' + meal.cost;
+
+                mealDiv.appendChild(mealTitle);
+                mealDiv.appendChild(ingredientsList);
+                mealDiv.appendChild(costInfo);
+
+                mealPlanDiv.appendChild(mealDiv);
+            });
+
+            const budgetInfo = document.createElement('p');
+            budgetInfo.textContent = 'Total Cost: $' + (budget - remainingBudget).toFixed(2) + ' | Remaining Budget: $' + remainingBudget.toFixed(2);
+            mealPlanDiv.appendChild(budgetInfo);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Gymer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='logo.png') }}">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <h1>Gymer</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="{{ url_for('problems') }}">Problems</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div>
+            <h1>Welcome to Our Innovative Page</h1>
+            <p>Discover cutting-edge features and seamless experiences</p>
+            <a href="#features" class="btn-primary">Explore Features</a>
+        </div>
+    </section>
+
+    <!-- Parallax Effect -->
+    <section class="parallax">
+        <p>"Practice makes perfect."</p>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <h2>Our Features</h2>
+        <div class="feature-cards">
+            <div class="feature-card">
+                <a href="{{ url_for('training_program') }}"><img src="https://images.pexels.com/photos/1552106/pexels-photo-1552106.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Feature 1"></a>
+                <div class="feature-card-content">
+                    <h3>Training Program</h3>
+                    <p>Make your own Training Program.</p>
+                </div>
+            </div>
+            <div class="feature-card">
+                <a href="{{ url_for('healthy_diet') }}"><img src="https://images.pexels.com/photos/3490348/pexels-photo-3490348.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Feature 2"></a>
+                <div class="feature-card-content">
+                    <h3>Healthy Diet</h3>
+                    <p>Make a diet based on your weight, height, and age.</p>
+                </div>
+            </div>
+            <div class="feature-card">
+                <a href="{{ url_for('progress') }}"><img src="https://images.pexels.com/photos/4164455/pexels-photo-4164455.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Feature 3"></a>
+                <div class="feature-card-content">
+                    <h3>Track Your Progress</h3>
+                    <p>Track your progress anytime.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <h2>About Us</h2>
+        <p>At Gymers, we believe that fitness is more than just a workout, it's a lifestyle. Our mission is to empower individuals to reach their full potential through tailored training programs, personalized healthy diet plans, and daily tasks designed to keep you on track and motivated. Whether you're a beginner or a seasoned athlete, our platform provides the tools and support you need to achieve your goals. We understand that every person is unique, which is why our approach is centered around customization. Our expert trainers and nutritionists work together to create programs that fit your lifestyle, preferences, and fitness level. From strength training to weight loss, muscle building to maintaining a balanced diet, we’re here to guide you every step of the way. Our daily tasks are more than just reminders; they are designed to help you build habits, stay consistent, and see real progress. With us, your fitness journey is not just about the destination, but about making every day count. Join us today and take the first step towards a healthier, stronger, and more confident you.</p>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <h2>Contact Us</h2>
+        <p>If you face any problems on our page, please let us know.</p>
+        <form action="mailto:hsnm43395@gmail.com" method="POST">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" rows="6" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Bros Gym. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const email = 'hsnm43395@gmail.com'; // Replace with your email address
+            const subject = 'Contact Us Form Submission';
+            const name = document.getElementById('name').value;
+            const userEmail = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            const body = `Name: ${name}%0AEmail: ${userEmail}%0A%0A${message}`;
+
+            window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        });
+    </script>
+</body>
+</html>

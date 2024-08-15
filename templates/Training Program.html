@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Training Program</title>
+    <link rel="icon" href="">
+    <style>
+        /* Color Palette */
+        :root {
+            --primary-color: #444; /* Dark Gray */
+            --secondary-color: #555; /* Medium Gray */
+            --accent-color: #777; /* Lighter Gray */
+            --background-color: #f4f4f4; /* Very Light Gray */
+            --text-color: #333; /* Slightly Darker Gray */
+            --light-text-color: #fff; /* White */
+            --hover-color: #666; /* Hover Gray */
+        }
+
+        /* Base Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+        }
+
+        header {
+            background: var(--primary-color);
+            color: var(--light-text-color);
+            padding: 20px 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-weight: 500;
+        }
+
+        nav {
+            background: var(--secondary-color);
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--light-text-color);
+            padding: 15px 20px;
+            text-decoration: none;
+            transition: background 0.3s;
+            border-radius: 5px;
+            margin: 5px;
+        }
+
+        nav a:hover {
+            background: var(--hover-color);
+        }
+
+        .container {
+            width: 90%;
+            margin: auto;
+            overflow: hidden;
+            padding: 20px 0;
+        }
+
+        form {
+            background: var(--light-text-color);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            max-width: 500px;
+            margin: 20px auto;
+            transition: transform 0.3s;
+        }
+
+        form:hover {
+            transform: scale(1.02);
+        }
+
+        form input, form select, form button {
+            width: 100%;
+            padding: 12px;
+            margin: 12px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        form button {
+            background-color: var(--primary-color);
+            color: var(--light-text-color);
+            border: none;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: var(--hover-color);
+        }
+
+        .day-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .day-buttons button {
+            background-color: var(--secondary-color);
+            color: var(--light-text-color);
+            border: none;
+            padding: 10px 15px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .day-buttons button.active, .day-buttons button:hover {
+            background-color: var(--hover-color);
+        }
+
+        .missions {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .mission-card {
+            background-color: var(--light-text-color);
+            border-radius: 10px;
+            width: 100%;
+            max-width: 400px;
+            margin: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .mission-card:hover {
+            transform: scale(1.05);
+        }
+
+        .mission-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .mission-card h3 {
+            margin: 10px 0;
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        .mission-card p {
+            padding: 0 10px 10px;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .mission-card {
+                width: 45%;
+            }
+        }
+
+        @media (max-width: 500px) {
+            nav a {
+                padding: 10px;
+            }
+
+            .mission-card, form {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Personalized Training Program</h1>
+    </header>
+
+    <nav>
+        <a href="home">Home</a>
+        <a href="Training Program">Training Program</a>
+        <a href="Healthy_diet">Healthy Diet</a>
+        <a href="Progress">Progress</a>
+    </nav>
+
+    <div class="container">
+        <form id="userInputForm">
+            <input type="number" id="age" name="age" placeholder="Age" min="0" max="120" required>
+            <input type="number" id="weight" name="weight" placeholder="Weight (kg)" min="0" max="200" required>
+            <input type="number" id="height" name="height" placeholder="Height (cm)" min="0" max="210" required>
+            <select id="trainingLocation" name="trainingLocation" required>
+                <option value="">Where will you train?</option>
+                <option value="home">At Home</option>
+                <option value="gym">At the Gym</option>
+            </select>
+            <button type="submit">Generate Training Program</button>
+        </form>
+
+        <div class="day-buttons" id="dayButtons"></div>
+
+        <div class="missions" id="missionsContainer"></div>
+    </div>
+
+    <script>
+        const gymExercises = [
+            { name: "Bench Press", details: "Perform 3 sets of 15 repetitions.", image: "https://th.bing.com/th/id/R.36fec79a630860a89ca17c62be801d33?rik=WG7B4OVF19G2Tg&pid=ImgRaw&r=0" },
+            { name: "Deadlifts", details: "Perform 3 sets of 12 repetitions.", image: "https://th.bing.com/th/id/R.1c9c8fe79f40e4724e4e4db06f9563b4?rik=ejdIAh6LJ2q7cw&riu=http%3a%2f%2fassets.menshealth.co.uk%2fmain%2fthumbs%2f33472%2fstiff-legged-deadlift.jpg&ehk=mFN0k9jf6i5wBO%2bvaJpLBfzAREVzNO3zjrHQUWby1fw%3d&risl=&pid=ImgRaw&r=0" },
+            { name: "Squats", details: "Perform 3 sets of 20 repetitions.", image: "https://th.bing.com/th/id/R.8c2cb97d24ecca532f70525a0b085378?rik=Mla7pWMd0q4fpw&pid=ImgRaw&r=0" },
+            { name: "Pull-ups", details: "Perform 3 sets of 10 repetitions.", image: "https://www.inspireusafoundation.org/wp-content/uploads/2022/11/pull-up-variations.jpg" },
+            { name: "Cable Rows", details: "Perform 3 sets of 12 repetitions.", image: "https://th.bing.com/th/id/OIP.w865JOy5flQsMoU4W7Sd4AHaGg?rs=1&pid=ImgDetMain" },
+            { name: "Leg Press", details: "Perform 3 sets of 15 repetitions.", image: "https://th.bing.com/th/id/R.db7f080df9d46f05dab24c58fac32e35?rik=FMn4BlEaDUMylg&pid=ImgRaw&r=0" },
+            { name: "Lat Pulldown", details: "Perform 3 sets of 12 repetitions.", image: "https://fitatmidlife.com/wp-content/uploads/bodybuilder-performing-lat-pulldowns-on-a-machine.jpg" },
+            { name: "Chest Fly", details: "Perform 3 sets of 12 repetitions.", image: "https://starmarkfitnessstudio.com/wp-content/uploads/2020/09/Chest-Fly.jpg" },
+            { name: "Smith Machine Squats", details: "Perform 3 sets of 15 repetitions.", image: "https://th.bing.com/th/id/R.677f6e78ba61d48e699d08e05f3b38ac?rik=yz5kEzAMTCnuAw&pid=ImgRaw&r=0" },
+            { name: "Bicep Curls", details: "Perform 3 sets of 12 repetitions.", image: "https://cdn-ami-drupal.heartyhosting.com/sites/muscleandfitness.com/files/styles/full_node_image_1090x614/public/media/1109-main-standing-bicep-curl.jpg?itok=Tm0yDyzk" },
+            { name: "Tricep Dips", details: "Perform 3 sets of 15 repetitions.", image: "https://th.bing.com/th/id/OIP.nwTGhePDdZcHIJ13AA7plAAAAA?rs=1&pid=ImgDetMain" },
+            { name: "Seated Leg Curl", details: "Perform 3 sets of 15 repetitions.", image: "https://th.bing.com/th/id/R.79c97c584cd5e67d98a9bf3adbed290a?rik=CQMOooczFZryvg&pid=ImgRaw&r=0" },
+            { name: "Leg Extension", details: "Perform 3 sets of 15 repetitions.", image: "https://th.bing.com/th/id/R.3d979fc0829426a306e8659166fb3f7d?rik=%2bTiQo5Uoixnthg&riu=http%3a%2f%2fcdn.shopify.com%2fs%2ffiles%2f1%2f1497%2f9682%2farticles%2f1_2_ab0ff668-3f2a-4612-98f6-b9a83cb57a17.jpg%3fv%3d1646929809&ehk=zJgCzzBbbgR6kmvkajj%2fXpdAnMIPphkt1d%2fFoJcKE7c%3d&risl=&pid=ImgRaw&r=0" },
+            { name: "Barbell Rows", details: "Perform 3 sets of 12 repetitions.", image: "https://th.bing.com/th/id/OIP.T4IFXMaq5C_nv5cHvJu8UgAAAA?rs=1&pid=ImgDetMain" },
+            { name: "Incline Bench Press", details: "Perform 3 sets of 12 repetitions.", image: "https://th.bing.com/th/id/OIP.ePflHDlT3hH5SZ3qQLD0-wAAAA?rs=1&pid=ImgDetMain" },
+            { name: "Hack Squat", details: "Perform 3 sets of 15 repetitions.", image: "https://static.wixstatic.com/media/2edbed_20dc60311ee242b1aa4b4c85ba8512ac~mv2.jpg/v1/fill/w_980,h_551,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/2edbed_20dc60311ee242b1aa4b4c85ba8512ac~mv2.jpg" },
+            { name: "Romanian Deadlift", details: "Perform 3 sets of 12 repetitions.", image: "https://th.bing.com/th/id/OIP.VoG6nRz-kzR3AwV5Hv7UlgHaE8?rs=1&pid=ImgDetMain" },
+            { name: "Dumbbell Shoulder Press", details: "Perform 3 sets of 15 repetitions.", image: "https://homegymreview.co.uk/wp-content/uploads/exercises/35471101-Dumbbell-Seated-Biceps-Curl-to-Shoulder-Press_Shoulders_max-scaled.jpg" },
+            { name: "Machine Chest Press", details: "Perform 3 sets of 12 repetitions.", image: "https://th.bing.com/th/id/OIP.gIapOKV5_TOoKF7TO9ateAHaFO?rs=1&pid=ImgDetMain" },
+            { name: "T-Bar Rows", details: "Perform 3 sets of 12 repetitions.", image: "https://th.bing.com/th/id/R.00e1fb4ca5bd672a02c3dc55ca6cbea5?rik=6Fjl4PlZHtY0iA&pid=ImgRaw&r=0" }
+        ];
+
+        const homeExercises = [
+            { name: "Push-ups", details: "Perform 3 sets of 15 repetitions.", image: "https://th.bing.com/th/id/OIP.inEqdJ5c0UQpkFlVn1CRlgHaEK?rs=1&pid=ImgDetMain" },
+            { name: "Lunges", details: "Perform 3 sets of 10 repetitions per leg.", image: "https://th.bing.com/th/id/R.f1aa2b856107accefe66bcf20629bfe0?rik=8%2bpXV%2b%2fqZbLkQA&pid=ImgRaw&r=0" },
+            { name: "Plank", details: "Hold for 1 minute. Repeat 3 times.", image: "https://th.bing.com/th/id/R.544f1cfcf0c7b70d039855a0461e0913?rik=tTlUbY5Jzh3Xxg&riu=http%3a%2f%2fbarbend.com%2fwp-content%2fuploads%2f2021%2f06%2fBarBend-Article-Image-760-x-427-2021-06-02T165321.789.jpg&ehk=qSyGO%2fW0%2fAOBmcKGu7F4Uvt%2bTzop5dYXd1xNO3ERGe4%3d&risl=&pid=ImgRaw&r=0" },
+            { name: "Burpees", details: "Perform 3 sets of 10 repetitions.", image: "https://th.bing.com/th/id/OIP.vDmjKQPoxkUb4Dn70UHX9wHaEZ?w=663&h=394&rs=1&pid=ImgDetMain" },
+            { name: "Mountain Climbers", details: "Perform 3 sets of 20 repetitions per leg.", image: "https://th.bing.com/th/id/R.7332b7ab82c0cefa5163f51fb82e0ebf?rik=9DZBmxGL2sI%2ffw&riu=http%3a%2f%2fhiitacademy.com%2fwp-content%2fuploads%2f2015%2f02%2fmountain_climbers-1024x305.jpg&ehk=kRC6CQ%2bZ5QMDdCLyOIIRykSvAw%2fMg%2f%2fYJu5nRYZARsk%3d&risl=&pid=ImgRaw&r=0" },
+            { name: "Jumping Jacks", details: "Perform 3 sets of 30 repetitions.", image: "https://th.bing.com/th/id/R.c86ec132bb27ce66a4b4c0490d1823c8?rik=JrxxXPVMSOB3nA&pid=ImgRaw&r=0&sres=1&sresct=1" },
+            { name: "High Knees", details: "Perform 3 sets of 20 repetitions per leg.", image: "https://www.focusfitness.net/stock-photos/wp-content/uploads/edd/2017/07/Fit-man-doing-high-knees-cardio-exercise.jpg" },
+            { name: "Glute Bridges", details: "Perform 3 sets of 20 repetitions.", image: "https://th.bing.com/th/id/R.06c97d6bd08366dc36da2d9787359c81?rik=8UlAg2WTOXgP5g&pid=ImgRaw&r=0" },
+            { name: "Side Plank", details: "Hold for 30 seconds per side. Repeat 3 times.", image: "https://th.bing.com/th/id/OIP.gJESVAsuE8kNnGCVQyJjjwHaDR?w=1024&h=453&rs=1&pid=ImgDetMain" },
+            { name: "Russian Twists", details: "Perform 3 sets of 20 repetitions per side.", image: "https://th.bing.com/th/id/OIP.MfmjOlvs9Wp5DLpv2FxVhQHaEo?w=640&h=400&rs=1&pid=ImgDetMain" },
+            { name: "Wall Sit", details: "Hold for 1 minute. Repeat 3 times.", image: "https://th.bing.com/th/id/OIP.d69TtkDt3C0E6BHrXi6guwHaEt?rs=1&pid=ImgDetMain" },
+            { name: "Tricep Dips", details: "Perform 3 sets of 15 repetitions.", image: "https://th.bing.com/th/id/OIP.81KcaEXnvzCxGfIaPkUwxAHaEK?rs=1&pid=ImgDetMain" },
+            { name: "Leg Raises", details: "Perform 3 sets of 15 repetitions.", image: "https://static.webshopapp.com/shops/006166/files/018389063/legraises.png" },
+            { name: "Bicycle Crunches", details: "Perform 3 sets of 20 repetitions.", image: "https://th.bing.com/th/id/R.2ecba1f25e9382f9b8cba0df02b190a8?rik=SHyiNXBmK95rUw&pid=ImgRaw&r=0" },
+            { name: "Pike Push-ups", details: "Perform 3 sets of 15 repetitions.", image: "https://th.bing.com/th/id/R.2776e37aab23e3e69814f7c25d6d29e2?rik=NGKQX3atI5JTuQ&pid=ImgRaw&r=0" },
+            { name: "Bear Crawl", details: "Perform 3 sets for 30 seconds.", image: "https://th.bing.com/th/id/OIP.GFNEUJp6LOQYZSW4fBujRAHaES?rs=1&pid=ImgDetMain" },
+            { name: "Superman Exercise", details: "Hold for 3 seconds, repeat 3 sets of 15.", image: "https://th.bing.com/th/id/R.e273bc3639ab7a53491f4a3b2a7d3094?rik=zzP37oKm2pUEZQ&riu=http%3a%2f%2fassets.menshealth.co.uk%2fmain%2fthumbs%2f33536%2fsuperman.jpg&ehk=luBviynKDbLuf1hv4do6CF9J3dyunXrRRoD2HvRmUdQ%3d&risl=&pid=ImgRaw&r=0" },
+            { name: "Bridge", details: "Perform 3 sets of 20 repetitions.", image: "https://th.bing.com/th/id/R.4ba3aa6e76f6efb850d06af0d6334017?rik=T5vw3ynjAr4Owg&pid=ImgRaw&r=0" },
+            { name: "Inchworm", details: "Perform 3 sets of 10 repetitions.", image: "https://cdn-ami-drupal.heartyhosting.com/sites/muscleandfitness.com/files/inchworm-stretch-main-1280.jpg" }
+        ];
+
+        const userInputForm = document.getElementById('userInputForm');
+        const dayButtonsDiv = document.getElementById('dayButtons');
+        const missionsContainer = document.getElementById('missionsContainer');
+        let trainingProgram = {};
+
+        userInputForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            generateTrainingProgram();
+        });
+
+        function generateTrainingProgram() {
+            trainingProgram = {};
+            dayButtonsDiv.innerHTML = '';
+            missionsContainer.innerHTML = '';
+
+            const trainingLocation = document.getElementById('trainingLocation').value;
+            const selectedExercises = trainingLocation === "gym" ? gymExercises : homeExercises;
+
+            for (let i = 1; i <= 7; i++) {
+                const dailyExercises = getRandomExercises(selectedExercises, 11);
+                trainingProgram['Day ' + i] = dailyExercises;
+
+                const dayButton = document.createElement('button');
+                dayButton.textContent = 'Day ' + i;
+                dayButton.id = 'Day ' + i;
+                dayButton.addEventListener('click', function() {
+                    highlightActiveButton(this);
+                    displayMissions('Day ' + i);
+                });
+                if (i === 1) {
+                    dayButton.classList.add('active');
+                    displayMissions('Day ' + i);
+                }
+                dayButtonsDiv.appendChild(dayButton);
+            }
+        }
+
+        function displayMissions(day) {
+            missionsContainer.innerHTML = '';
+            const exercises = trainingProgram[day];
+
+            exercises.forEach(function(exercise) {
+                const missionCard = document.createElement('div');
+                missionCard.className = 'mission-card';
+
+                const exerciseImage = document.createElement('img');
+                exerciseImage.src = exercise.image;
+                exerciseImage.alt = exercise.name;
+                exerciseImage.onerror = function() {
+                    this.src = 'placeholder_image.jpg';
+                };
+
+                const exerciseName = document.createElement('h3');
+                exerciseName.textContent = exercise.name;
+
+                const exerciseDetails = document.createElement('p');
+                exerciseDetails.textContent = exercise.details;
+
+                missionCard.appendChild(exerciseImage);
+                missionCard.appendChild(exerciseName);
+                missionCard.appendChild(exerciseDetails);
+
+                missionsContainer.appendChild(missionCard);
+            });
+        }
+
+        function highlightActiveButton(activeButton) {
+            const buttons = document.querySelectorAll('.day-buttons button');
+            buttons.forEach(button => button.classList.remove('active'));
+            activeButton.classList.add('active');
+        }
+
+        function getRandomExercises(exercises, num) {
+            const shuffled = exercises.sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, num);
+        }
+    </script>
+</body>
+</html>

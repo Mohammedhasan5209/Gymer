@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Progress Tracker</title>
+    <link rel="icon" href="../logo.png">
+    <style>
+        /* Base Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            align-items: center;
+            justify-content: center;
+        }
+
+        header {
+            background: #333;
+            color: #fff;
+            padding: 20px 0;
+            width: 100%;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+
+        nav {
+            background: #444;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+
+        nav a {
+            color: #fff;
+            padding: 15px 20px;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        nav a:hover {
+            background: #555;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .mission {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 10px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 600px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            align-items: center;
+            font-size: 18px;
+        }
+
+        .mission:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+        }
+
+        .mission input[type="checkbox"] {
+            margin-right: 15px;
+            transform: scale(1.5);
+            cursor: pointer;
+        }
+
+        .mission label {
+            flex: 1;
+            cursor: pointer;
+        }
+
+        #completionAnimation {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            z-index: 1000;
+            font-size: 24px;
+            text-align: center;
+            animation: fadeInOut 3s;
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        /* Media Queries */
+        @media (max-width: 500px) {
+            nav a {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Daily Missions</h1>
+    </header>
+
+    <nav>
+        <a href="home">Home</a>
+        <a href="Training Program">Training Program</a>
+        <a href="Healthy_diet">Healthy Diet</a>
+        <a href="Progress">Progress</a>
+    </nav>
+
+    <div class="container" id="missionsList"></div>
+    <div id="completionAnimation">Congratulations! You completed all your missions for today!</div>
+
+    <script>
+        const missions = [
+            "Complete 30 minutes of cardio",
+            "Perform 3 sets of squats",
+            "Do 20 push-ups",
+            "Hold a plank for 1 minute",
+            "Stretch for 15 minutes",
+            "Drink 2 liters of water",
+            "Eat at least 5 servings of fruits and vegetables",
+            "Avoid sugary snacks",
+            "Sleep for at least 7 hours",
+            "Meditate for 10 minutes",
+            "Do 3 sets of lunges",
+            "Perform 3 sets of bicep curls",
+            "Do 10 minutes of HIIT",
+            "Run for 2 kilometers",
+            "Do 3 sets of tricep dips",
+            "Practice deep breathing for 5 minutes",
+            "Do 20 jumping jacks",
+            "Hold a side plank for 30 seconds per side",
+            "Perform 3 sets of deadlifts",
+            "Spend 10 minutes practicing yoga",
+            "Try a new healthy recipe",
+            "Complete a 5 km walk",
+            "Try a new exercise routine",
+            "Hold a wall sit for 1 minute",
+            "Do 15 burpees",
+            "Perform 3 sets of shoulder presses",
+            "Do 30 mountain climbers",
+            "Complete a 10-minute stretch routine",
+            "Do 10 minutes of foam rolling",
+            "Try a new fitness class",
+            "Walk 10,000 steps",
+            "Do 3 sets of bench presses",
+            "Practice a new breathing technique",
+            "Hold a boat pose for 30 seconds",
+            "Do 20 sit-ups",
+            "Perform 3 sets of leg raises",
+            "Do 15 tricep extensions",
+            "Run 5 km",
+            "Do 3 sets of lat pulldowns",
+            "Perform a 5-minute meditation",
+            "Try a new sport",
+            "Complete a 30-minute workout challenge",
+            "Do 3 sets of chest flies",
+            "Try a new protein shake recipe",
+            "Hold a bridge pose for 1 minute",
+            "Do 15 bicycle crunches",
+            "Perform 3 sets of hammer curls",
+            "Try a new yoga pose",
+            "Do 20 calf raises",
+            "Complete a 45-minute cardio session",
+            "Do 3 sets of tricep kickbacks",
+            "Practice mindfulness for 10 minutes",
+            "Do 30 seconds of high knees",
+            "Try a new flexibility routine",
+            "Complete 15 minutes of high-intensity cardio",
+            "Perform 3 sets of bent-over rows",
+            "Hold a reverse plank for 30 seconds",
+            "Do 20 Russian twists",
+            "Try a new stretching technique",
+            "Complete a 60-minute workout",
+            "Do 3 sets of chest presses",
+            "Run 3 km at a brisk pace",
+            "Do 15 side lunges",
+            "Perform 3 sets of cable rows",
+            "Try a new healthy dessert recipe",
+            "Complete a 30-minute strength training session",
+            "Do 3 sets of front raises",
+            "Hold a warrior pose for 30 seconds per side",
+            "Do 20 alternating leg raises",
+            "Complete a 15-minute Pilates session",
+            "Perform 3 sets of push presses",
+            "Try a new meditation app",
+            "Do 10 minutes of agility drills",
+            "Complete a 30-minute bodyweight workout",
+            "Do 3 sets of single-leg deadlifts",
+            "Practice a new yoga sequence",
+            "Run 2 km on a treadmill",
+            "Do 20 flutter kicks",
+            "Perform 3 sets of skull crushers",
+            "Try a new healthy snack",
+            "Complete a 30-minute kickboxing session",
+            "Do 15 sets of alternating lunges",
+            "Hold a downward dog pose for 1 minute",
+            "Do 20 leg circles",
+            "Perform 3 sets of incline bench presses",
+            "Try a new running route",
+            "Complete a 30-minute rowing session",
+            "Do 20 seconds of burpee jumps",
+            "Do 3 sets of cable chest presses",
+            "Try a new fitness video",
+            "Complete a 30-minute hike",
+            "Do 3 sets of seated rows",
+            "Hold a pigeon pose for 30 seconds per side",
+            "Do 15 mountain climbers per leg",
+            "Perform 3 sets of chest dips",
+            "Complete a 30-minute spin class",
+            "Do 20 seconds of plank jacks",
+            "Do 3 sets of rear delt raises",
+            "Try a new fitness book",
+            "Complete a 30-minute boot camp session"
+        ];
+
+        const missionsListDiv = document.getElementById('missionsList');
+        const completionAnimationDiv = document.getElementById('completionAnimation');
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function getDailyMissions() {
+            const shuffledMissions = shuffle([...missions]).slice(0, 8);
+            return shuffledMissions;
+        }
+
+        function displayMissions() {
+            missionsListDiv.innerHTML = '';
+            const dailyMissions = getDailyMissions();
+
+            dailyMissions.forEach(function(mission, index) {
+                const missionDiv = document.createElement('div');
+                missionDiv.className = 'mission';
+
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.id = 'mission' + index;
+
+                const label = document.createElement('label');
+                label.htmlFor = 'mission' + index;
+                label.textContent = mission;
+
+                checkbox.addEventListener('change', checkCompletion);
+
+                missionDiv.appendChild(checkbox);
+                missionDiv.appendChild(label);
+
+                missionsListDiv.appendChild(missionDiv);
+            });
+        }
+
+        function checkCompletion() {
+            const checkboxes = document.querySelectorAll('.mission input[type="checkbox"]');
+            const allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
+
+            if (allChecked) {
+                completionAnimationDiv.style.display = 'block';
+                setTimeout(() => {
+                    completionAnimationDiv.style.display = 'none';
+                }, 3000);
+            }
+        }
+
+        // Initial display of missions
+        displayMissions();
+    </script>
+</body>
+</html>

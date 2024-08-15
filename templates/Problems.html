@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="logo.png">
+    <title>Gym Problems and Solutions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav {
+            background: #444;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: #fff;
+            padding: 15px 20px;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        nav a:hover {
+            background: #555;
+        }
+
+        .search-bar {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .search-bar input {
+            width: 50%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .problem {
+            background: #fff;
+            border: 1px solid #ddd;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .problem h1 {
+            margin: 0;
+            font-size: 1.2em;
+        }
+        .problem p {
+            margin: 5px 0;
+        }
+        .no-results {
+            display: none;
+            text-align: center;
+            font-size: 1.2em;
+            color: #ff0000;
+        }
+        @media (max-width: 768px) {
+            .meal-plan, form {
+                width: 90%;
+            }
+        }
+
+        @media (max-width: 500px) {
+            nav a {
+                padding: 10px;
+            }
+
+            form input, form button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Gym Problems and Solutions</h1>
+    </header>
+    <nav>
+        <a href="home">Home</a>
+        <a href="Training Program">Training Program</a>
+        <a href="Healthy_diet">Healthy Diet</a>
+        <a href="Progress">Progress</a>
+    </nav>
+    <div class="container">
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search problems...">
+        </div>
+        <div class="no-results" id="noResults">
+            No problems available for your search.
+        </div>
+        <!-- Problem 1 -->
+        <div class="problem">
+            <h1>Equipment Availability</h1>
+            <p><strong>Issue:</strong> Popular machines are often occupied during peak hours.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Increase Equipment: Add more of the most popular machines.</li>
+                <li>Time Limits: Implement time limits for high-demand equipment.</li>
+                <li>Reservation System: Introduce a system where members can book equipment in advance.</li>
+            </ul>
+        </div>
+        <!-- Problem 2 -->
+        <div class="problem">
+            <h1>Noise and Distractions</h1>
+            <p><strong>Issue:</strong> Excessive noise and distractions in the gym.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Noise-Canceling Headphones: Use noise-canceling headphones during workouts.</li>
+                <li>Designated Areas: Create designated quiet areas in the gym.</li>
+                <li>Soundproofing: Implement soundproofing measures where possible.</li>
+            </ul>
+        </div>
+        <!-- Problem 3 -->
+        <div class="problem">
+            <h1>Unclear Workout Instructions</h1>
+            <p><strong>Issue:</strong> Difficulty understanding workout instructions.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Trainer Assistance: Seek help from a trainer for clarification.</li>
+                <li>Written Instructions: Provide written or visual instructions for exercises.</li>
+                <li>Group Classes: Join group classes for guided workouts.</li>
+            </ul>
+        </div>
+        <!-- Problem 4 -->
+        <div class="problem">
+            <h1>Uncomfortable Gym Environment</h1>
+            <p><strong>Issue:</strong> Discomfort due to the gym environment.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Temperature Control: Ensure proper temperature control in the gym.</li>
+                <li>Ventilation: Improve ventilation to maintain air quality.</li>
+                <li>Cleanliness: Maintain high standards of cleanliness and hygiene.</li>
+            </ul>
+        </div>
+        <!-- Problem 5 -->
+        <div class="problem">
+            <h1>Inadequate Lighting</h1>
+            <p><strong>Issue:</strong> Poor lighting affecting workout performance.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Upgrade Lighting: Improve lighting to ensure adequate visibility.</li>
+                <li>Natural Light: Utilize natural light where possible.</li>
+                <li>Task Lighting: Add task lighting for specific workout areas.</li>
+            </ul>
+        </div>
+        <!-- Problem 6 -->
+        <div class="problem">
+            <h1>Unfriendly Staff</h1>
+            <p><strong>Issue:</strong> Encountering unfriendly or unhelpful staff.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Feedback: Provide feedback to management about staff behavior.</li>
+                <li>Staff Training: Implement regular training for staff on customer service.</li>
+                <li>Friendly Environment: Foster a welcoming and supportive gym environment.</li>
+            </ul>
+        </div>
+        <!-- Problem 7 -->
+        <div class="problem">
+            <h1>Limited Class Availability</h1>
+            <p><strong>Issue:</strong> Difficulty finding available classes that fit your schedule.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Class Scheduling: Offer a range of class times to accommodate different schedules.</li>
+                <li>Advanced Booking: Allow members to book classes in advance.</li>
+                <li>Additional Classes: Increase the number of classes offered.</li>
+            </ul>
+        </div>
+        <!-- Problem 8 -->
+        <div class="problem">
+            <h1>Uncomfortable Equipment</h1>
+            <p><strong>Issue:</strong> Equipment that is uncomfortable to use.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Maintenance: Regularly maintain and replace equipment.</li>
+                <li>Comfort Enhancements: Add padding or adjustments to improve comfort.</li>
+                <li>Feedback System: Implement a feedback system for equipment issues.</li>
+            </ul>
+        </div>
+        <!-- Problem 9 -->
+        <div class="problem">
+            <h1>Limited Personal Training Sessions</h1>
+            <p><strong>Issue:</strong> Difficulty accessing personal training sessions.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Increased Availability: Increase the number of personal trainers available.</li>
+                <li>Online Booking: Implement an online booking system for personal training.</li>
+                <li>Flexible Hours: Offer flexible hours for personal training sessions.</li>
+            </ul>
+        </div>
+        <!-- Problem 10 -->
+        <div class="problem">
+            <h1>Equipment Malfunctions</h1>
+            <p><strong>Issue:</strong> Equipment frequently malfunctions or is out of order.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Regular Inspections: Conduct regular inspections and maintenance of equipment.</li>
+                <li>Quick Repairs: Implement a system for quick repairs and replacements.</li>
+                <li>Report System: Set up an easy-to-use reporting system for malfunctioning equipment.</li>
+            </ul>
+        </div>
+        <!-- Problem 11 -->
+        <div class="problem">
+            <h1>Overcrowded Classes</h1>
+            <p><strong>Issue:</strong> Fitness classes are overcrowded and uncomfortable.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Class Size Limits: Set limits on class sizes to avoid overcrowding.</li>
+                <li>Additional Sessions: Offer additional sessions or classes to accommodate more members.</li>
+                <li>Reservation System: Implement a reservation system to manage class sizes.</li>
+            </ul>
+        </div>
+        <!-- Problem 12 -->
+        <div class="problem">
+            <h1>Lack of Specialized Equipment</h1>
+            <p><strong>Issue:</strong> The gym lacks specialized equipment for certain exercises.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Equipment Inventory: Assess and expand the equipment inventory based on member needs.</li>
+                <li>Request System: Allow members to request specific equipment.</li>
+                <li>Upgrade Equipment: Invest in specialized equipment as needed.</li>
+            </ul>
+        </div>
+        <!-- Problem 13 -->
+        <div class="problem">
+            <h1>Difficulty Tracking Progress</h1>
+            <p><strong>Issue:</strong> Difficulty in tracking workout progress and improvements.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Fitness App: Use a fitness app to track workouts and progress.</li>
+                <li>Progress Charts: Provide progress charts and logs.</li>
+                <li>Regular Assessments: Schedule regular fitness assessments with trainers.</li>
+            </ul>
+        </div>
+        <!-- Problem 14 -->
+        <div class="problem">
+            <h1>Limited Access to Group Fitness Equipment</h1>
+            <p><strong>Issue:</strong> Limited availability of equipment used in group fitness classes.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Increase Equipment: Add more equipment used in group fitness classes.</li>
+                <li>Class Scheduling: Schedule classes to ensure equipment availability.</li>
+                <li>Equipment Sharing: Implement a system for sharing equipment during classes.</li>
+            </ul>
+        </div>
+        <!-- Problem 15 -->
+        <div class="problem">
+            <h1>Unorganized Equipment</h1>
+            <p><strong>Issue:</strong> Equipment is often left disorganized and misplaced.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Organization System: Implement a clear organization system for equipment.</li>
+                <li>Staff Oversight: Assign staff to oversee equipment organization.</li>
+                <li>Member Responsibility: Educate members on returning equipment to its proper place.</li>
+            </ul>
+        </div>
+        <!-- Problem 16 -->
+        <div class="problem">
+            <h1>Inadequate Parking</h1>
+            <p><strong>Issue:</strong> Insufficient parking space for gym members.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Expand Parking: Increase the parking capacity if possible.</li>
+                <li>Alternative Solutions: Explore alternative parking solutions such as partnerships with nearby lots.</li>
+                <li>Carpooling: Encourage carpooling among members.</li>
+            </ul>
+        </div>
+        <!-- Problem 17 -->
+        <div class="problem">
+            <h1>Inadequate Shower Facilities</h1>
+            <p><strong>Issue:</strong> Insufficient or poorly maintained shower facilities.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Upgrade Facilities: Improve and maintain shower facilities.</li>
+                <li>Regular Cleaning: Implement a rigorous cleaning schedule.</li>
+                <li>Additional Showers: Add more showers to reduce wait times.</li>
+            </ul>
+        </div>
+        <!-- Problem 18 -->
+        <div class="problem">
+            <h1>Unstable Wi-Fi Connection</h1>
+            <p><strong>Issue:</strong> Unstable Wi-Fi connection affecting app usage and online resources.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Upgrade Network: Invest in a more reliable Wi-Fi network.</li>
+                <li>Technical Support: Provide technical support for connectivity issues.</li>
+                <li>Offline Resources: Offer offline resources for members without internet access.</li>
+            </ul>
+        </div>
+        <!-- Problem 19 -->
+        <div class="problem">
+            <h1>Inadequate Signage</h1>
+            <p><strong>Issue:</strong> Lack of clear signage within the gym.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Install Signage: Install clear and informative signage throughout the gym.</li>
+                <li>Directional Maps: Provide directional maps for easy navigation.</li>
+                <li>Regular Updates: Update signage as necessary to reflect changes.</li>
+            </ul>
+        </div>
+        <!-- Problem 20 -->
+        <div class="problem">
+            <h1>Limited Space for Group Exercises</h1>
+            <p><strong>Issue:</strong> Insufficient space for group exercise classes.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Expand Space: If possible, expand the space allocated for group exercises.</li>
+                <li>Class Scheduling: Schedule classes to optimize the use of available space.</li>
+                <li>Outdoor Classes: Offer outdoor group exercise options when weather permits.</li>
+            </ul>
+        </div>
+        <!-- Problem 21 -->
+        <div class="problem">
+            <h1>Lack of Nutrition Guidance</h1>
+            <p><strong>Issue:</strong> Absence of nutrition guidance and support for members.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Nutrition Workshops: Offer workshops and seminars on nutrition.</li>
+                <li>Consultations: Provide access to nutritionists or dietitians.</li>
+                <li>Information Resources: Make nutritional information available through various channels.</li>
+            </ul>
+        </div>
+        <!-- Problem 22 -->
+        <div class="problem">
+            <h1>Insufficient Hydration Stations</h1>
+            <p><strong>Issue:</strong> Lack of hydration stations or water fountains.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Install Stations: Increase the number of hydration stations and water fountains.</li>
+                <li>Maintain Cleanliness: Ensure regular maintenance and cleanliness of hydration stations.</li>
+                <li>Provide Water Bottles: Offer water bottles for purchase or rental.</li>
+            </ul>
+        </div>
+        <!-- Problem 23 -->
+        <div class="problem">
+            <h1>Limited Childcare Services</h1>
+            <p><strong>Issue:</strong> Lack of childcare services for members with children.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Childcare Facility: Set up a dedicated childcare facility within the gym.</li>
+                <li>Qualified Staff: Ensure the childcare staff are qualified and trained.</li>
+                <li>Flexible Hours: Offer flexible childcare hours to suit members' schedules.</li>
+            </ul>
+        </div>
+        <!-- Problem 24 -->
+        <div class="problem">
+            <h1>Limited Access to Trainers</h1>
+            <p><strong>Issue:</strong> Limited availability or access to personal trainers.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Increase Trainers: Hire additional trainers to increase availability.</li>
+                <li>Online Training: Offer online training sessions and consultations.</li>
+                <li>Extended Hours: Extend trainer availability hours to accommodate more members.</li>
+            </ul>
+        </div>
+        <!-- Problem 25 -->
+        <div class="problem">
+            <h1>Inconsistent Temperature Control</h1>
+            <p><strong>Issue:</strong> Inconsistent temperature control leading to discomfort.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Regular Maintenance: Regularly maintain and inspect HVAC systems.</li>
+                <li>Temperature Monitoring: Install temperature monitoring systems.</li>
+                <li>Adjustments: Make necessary adjustments to maintain a comfortable environment.</li>
+            </ul>
+        </div>
+        <!-- Problem 26 -->
+        <div class="problem">
+            <h1>Disorganized Facility Layout</h1>
+            <p><strong>Issue:</strong> Disorganized layout making it difficult to navigate the gym.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Clear Signage: Use clear signage and maps to guide members.</li>
+                <li>Facility Planning: Design the facility layout to enhance flow and accessibility.</li>
+                <li>Feedback: Gather member feedback to identify areas for improvement.</li>
+            </ul>
+        </div>
+        <!-- Problem 27 -->
+        <div class="problem">
+            <h1>Lack of Proper Ventilation</h1>
+            <p><strong>Issue:</strong> Poor ventilation leading to stuffy and uncomfortable conditions.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Ventilation System: Install or upgrade the gym’s ventilation system.</li>
+                <li>Air Quality: Regularly check and improve indoor air quality.</li>
+                <li>Windows and Fans: Use windows and fans to enhance air circulation.</li>
+            </ul>
+        </div>
+        <!-- Problem 28 -->
+        <div class="problem">
+            <h1>Limited Access to Recovery Tools</h1>
+            <p><strong>Issue:</strong> Lack of recovery tools like foam rollers and massage equipment.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Equip Recovery Area: Set up a dedicated recovery area with necessary tools.</li>
+                <li>Tool Availability: Ensure recovery tools are readily available and well-maintained.</li>
+                <li>Education: Educate members on the use of recovery tools.</li>
+            </ul>
+        </div>
+        <!-- Problem 29 -->
+        <div class="problem">
+            <h1>High Turnover of Trainers</h1>
+            <p><strong>Issue:</strong> Frequent changes in personal trainers affecting continuity.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Trainer Retention: Implement strategies to retain experienced trainers.</li>
+                <li>Consistent Assignments: Assign trainers consistently to build rapport with members.</li>
+                <li>Member Feedback: Collect feedback on trainer experiences and make improvements.</li>
+            </ul>
+        </div>
+        <!-- Problem 30 -->
+        <div class="problem">
+            <h1>Limited Cardio Equipment</h1>
+            <p><strong>Issue:</strong> Insufficient cardio equipment for members.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Increase Equipment: Add more cardio machines to the gym.</li>
+                <li>Peak Hours Planning: Monitor and manage equipment usage during peak hours.</li>
+                <li>Alternative Options: Provide alternative cardio options such as classes or outdoor activities.</li>
+            </ul>
+        </div>
+        <!-- Problem 31 -->
+        <div class="problem">
+            <h1>Limited Access to Fitness Classes</h1>
+            <p><strong>Issue:</strong> Limited availability of fitness classes for members.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Increase Classes: Offer a wider range of fitness classes.</li>
+                <li>Additional Times: Schedule additional classes to meet member demand.</li>
+                <li>Class Reservation: Implement a reservation system for classes.</li>
+            </ul>
+        </div>
+        <!-- Problem 32 -->
+        <div class="problem">
+            <h1>Limited Access to Specialized Trainers</h1>
+            <p><strong>Issue:</strong> Lack of specialized trainers for specific fitness needs.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Hire Specialists: Recruit trainers with specialized skills and certifications.</li>
+                <li>Specialized Classes: Offer classes led by specialized trainers.</li>
+                <li>Consultations: Provide access to one-on-one consultations with specialists.</li>
+            </ul>
+        </div>
+        <!-- Problem 33 -->
+        <div class="problem">
+            <h1>Lack of Fitness Resources</h1>
+            <p><strong>Issue:</strong> Insufficient fitness resources and educational materials.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Resource Library: Create a library of fitness resources and materials.</li>
+                <li>Online Resources: Provide access to online fitness guides and tutorials.</li>
+                <li>Educational Workshops: Offer workshops on various fitness topics.</li>
+            </ul>
+        </div>
+        <!-- Problem 34 -->
+        <div class="problem">
+            <h1>Inconsistent Class Scheduling</h1>
+            <p><strong>Issue:</strong> Unpredictable or inconsistent scheduling of fitness classes.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Regular Schedule: Establish a consistent class schedule.</li>
+                <li>Advance Notice: Provide advance notice of class schedules and changes.</li>
+                <li>Member Preferences: Adjust schedules based on member preferences and feedback.</li>
+            </ul>
+        </div>
+        <!-- Problem 35 -->
+        <div class="problem">
+            <h1>Lack of Equipment Instructions</h1>
+            <p><strong>Issue:</strong> Lack of instructions on how to use gym equipment.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Instructional Signs: Add instructional signs on equipment.</li>
+                <li>Trainer Assistance: Offer assistance from trainers on equipment use.</li>
+                <li>Online Tutorials: Provide online tutorials and guides for equipment use.</li>
+            </ul>
+        </div>
+        <!-- Problem 36 -->
+        <div class="problem">
+            <h1>Limited Space for Individual Workouts</h1>
+            <p><strong>Issue:</strong> Lack of space for individual workouts and exercises.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Designated Areas: Create designated areas for individual workouts.</li>
+                <li>Equipment Organization: Organize equipment to maximize space.</li>
+                <li>Alternate Locations: Use alternate locations or times for individual workouts.</li>
+            </ul>
+        </div>
+        <!-- Problem 37 -->
+        <div class="problem">
+            <h1>Inadequate Cleanliness in Locker Rooms</h1>
+            <p><strong>Issue:</strong> Locker rooms are not cleaned regularly or thoroughly.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Regular Cleaning: Implement a regular cleaning schedule for locker rooms.</li>
+                <li>Hygiene Products: Provide hygiene products like sanitizers and wipes.</li>
+                <li>Member Feedback: Collect feedback to ensure locker room cleanliness.</li>
+            </ul>
+        </div>
+        <!-- Problem 38 -->
+        <div class="problem">
+            <h1>Lack of Accessible Facilities</h1>
+            <p><strong>Issue:</strong> Gym facilities are not accessible to all members, including those with disabilities.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Accessibility Improvements: Make necessary adjustments to improve accessibility.</li>
+                <li>Inclusive Equipment: Provide equipment that is accessible to all members.</li>
+                <li>Staff Training: Train staff to assist members with disabilities.</li>
+            </ul>
+        </div>
+        <!-- Problem 39 -->
+        <div class="problem">
+            <h1>Limited Options for Post-Workout Nutrition</h1>
+            <p><strong>Issue:</strong> Limited availability of post-workout nutrition options.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Nutrition Bar: Set up a nutrition bar with healthy options.</li>
+                <li>Partnerships: Partner with local vendors for post-workout snacks.</li>
+                <li>Information: Provide nutritional information and recommendations.</li>
+            </ul>
+        </div>
+        <!-- Problem 40 -->
+        <div class="problem">
+            <h1>Inadequate Cooling Systems</h1>
+            <p><strong>Issue:</strong> Inadequate cooling systems leading to discomfort during workouts.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Upgrade Cooling: Improve or install new cooling systems.</li>
+                <li>Airflow: Enhance airflow with fans or ventilation systems.</li>
+                <li>Member Comfort: Regularly assess and adjust temperature settings for comfort.</li>
+            </ul>
+        </div>
+        <!-- Problem 41 -->
+        <div class="problem">
+            <h1>Lack of Personal Space</h1>
+            <p><strong>Issue:</strong> Members feel they lack personal space during workouts.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Space Planning: Plan gym layout to maximize personal space.</li>
+                <li>Equipment Spacing: Ensure proper spacing between equipment.</li>
+                <li>Member Feedback: Gather feedback to address personal space concerns.</li>
+            </ul>
+        </div>
+        <!-- Problem 42 -->
+        <div class="problem">
+            <h1>Inadequate Staff Training</h1>
+            <p><strong>Issue:</strong> Staff are inadequately trained to handle various situations.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Regular Training: Provide ongoing training for staff.</li>
+                <li>Certification Programs: Offer certification programs for staff development.</li>
+                <li>Feedback and Evaluation: Regularly evaluate staff performance and provide feedback.</li>
+            </ul>
+        </div>
+        <!-- Problem 43 -->
+        <div class="problem">
+            <h1>Limited Access to Flexibility Training</h1>
+            <p><strong>Issue:</strong> Limited options for flexibility and stretching exercises.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Stretching Classes: Offer dedicated stretching and flexibility classes.</li>
+                <li>Stretching Areas: Designate areas for stretching and flexibility exercises.</li>
+                <li>Instructional Materials: Provide instructional materials on flexibility training.</li>
+            </ul>
+        </div>
+        <!-- Problem 44 -->
+        <div class="problem">
+            <h1>Lack of Social Engagement Opportunities</h1>
+            <p><strong>Issue:</strong> Limited opportunities for social engagement and community building.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Social Events: Organize social events and fitness challenges.</li>
+                <li>Group Workouts: Encourage group workouts and activities.</li>
+                <li>Community Boards: Set up community boards for member interactions.</li>
+            </ul>
+        </div>
+        <!-- Problem 45 -->
+        <div class="problem">
+            <h1>Inconsistent Equipment Maintenance</h1>
+            <p><strong>Issue:</strong> Equipment is not consistently maintained or repaired.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Maintenance Schedule: Implement a regular maintenance schedule for equipment.</li>
+                <li>Repair System: Establish a quick repair system for malfunctioning equipment.</li>
+                <li>Feedback System: Set up a feedback system for reporting equipment issues.</li>
+            </ul>
+        </div>
+        <!-- Problem 46 -->
+        <div class="problem">
+            <h1>Inadequate Parking Security</h1>
+            <p><strong>Issue:</strong> Insufficient security in the gym’s parking area.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Security Measures: Improve security measures such as surveillance cameras.</li>
+                <li>Patrols: Increase security patrols in the parking area.</li>
+                <li>Member Awareness: Educate members on parking lot safety and security.</li>
+            </ul>
+        </div>
+        <!-- Problem 47 -->
+        <div class="problem">
+            <h1>Limited Access to Recovery Specialists</h1>
+            <p><strong>Issue:</strong> Lack of access to recovery specialists like physiotherapists.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Hire Specialists: Employ recovery specialists within the gym.</li>
+                <li>Partnerships: Partner with external recovery clinics for referrals.</li>
+                <li>Workshops: Offer workshops on recovery and injury prevention.</li>
+            </ul>
+        </div>
+        <!-- Problem 48 -->
+        <div class="problem">
+            <h1>Inadequate Lighting in Workout Areas</h1>
+            <p><strong>Issue:</strong> Poor lighting in workout areas affecting visibility and safety.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Upgrade Lighting: Improve lighting in all workout areas.</li>
+                <li>Safety Measures: Ensure adequate lighting for safety and visibility.</li>
+                <li>Regular Checks: Conduct regular checks to maintain lighting conditions.</li>
+            </ul>
+        </div>
+        <!-- Problem 49 -->
+        <div class="problem">
+            <h1>Lack of Emergency Procedures</h1>
+            <p><strong>Issue:</strong> Lack of clear emergency procedures and protocols.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Emergency Plan: Develop and implement a comprehensive emergency plan.</li>
+                <li>Staff Training: Train staff on emergency procedures and first aid.</li>
+                <li>Signage: Post clear emergency instructions throughout the gym.</li>
+            </ul>
+        </div>
+        <!-- Problem 50 -->
+        <div class="problem">
+            <h1>Limited Access to Aquatic Facilities</h1>
+            <p><strong>Issue:</strong> Lack of access to swimming pools or other aquatic facilities.</p>
+            <p><strong>Solution:</strong></p>
+            <ul>
+                <li>Facility Addition: Consider adding an aquatic facility to the gym.</li>
+                <li>Partnerships: Partner with local pools or aquatic centers.</li>
+                <li>Member Access: Provide information on nearby aquatic facilities for members.</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        document.getElementById('searchInput').addEventListener('input', function() {
+            var searchValue = this.value.toLowerCase();
+            var problems = document.querySelectorAll('.problem');
+            var noResults = document.getElementById('noResults');
+            var hasResults = false;
+
+            problems.forEach(function(problem) {
+                var title = problem.querySelector('h1').textContent.toLowerCase();
+                if (title.includes(searchValue)) {
+                    problem.style.display = '';
+                    hasResults = true;
+                } else {
+                    problem.style.display = 'none';
+                }
+            });
+
+            noResults.style.display = hasResults ? 'none' : 'block';
+        });
+    </script>
+</body>
+</html>

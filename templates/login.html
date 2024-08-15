@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=Margarine&family=Pacifico&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In/Sign Up - Gymer</title>
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #2C2C2C;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #444;
+            padding: 30px 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            width: 400px;
+            text-align: center;
+        }
+
+        .form-container {
+            display: none;
+        }
+
+        .form-container.active {
+            display: block;
+        }
+
+        .container h2 {
+            color: #E6E6E6;
+            margin-bottom: 20px;
+            font-size: 30px;
+            font-family: 'Pacifico', cursive;
+        }
+
+        .container label {
+            display: block;
+            margin: 10px 0 5px;
+            text-align: left;
+            color: #E6E6E6;
+            font-weight: 600;
+        }
+
+        .container input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #555;
+            border-radius: 10px;
+            background-color: #555;
+            color: #E6E6E6;
+        }
+
+        .container input:focus {
+            outline: none;
+            border-color: #66CDAA;
+        }
+
+        .container button {
+            background-color: #66CDAA;
+            color: #2C2C2C;
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 20px;
+            margin-top: 10px;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        .container button:hover {
+            background-color: #5EB8A7;
+        }
+
+        .toggle-buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .toggle-buttons button {
+            background-color: #555;
+            color: #E6E6E6;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .toggle-buttons button.active {
+            background-color: #66CDAA;
+            color: #2C2C2C;
+        }
+
+        .toggle-buttons button:hover {
+            background-color: #5EB8A7;
+        }
+
+        .flash-messages {
+            margin-bottom: 20px;
+        }
+
+        .flash {
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .flash.error {
+            background-color: #ff6b6b;
+        }
+
+        .flash.success {
+            background-color: #66CDAA;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Display flash messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="flash {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <div class="form-container active" id="signin-container">
+            <h2>Sign In</h2>
+            <form action="/" method="POST">
+                <label for="signin-username">Username</label>
+                <input type="text" id="signin-username" name="username" required>
+                <label for="signin-password">Password</label>
+                <input type="password" id="signin-password" name="password" required>
+                <button type="submit" name="signin">Sign In</button>
+            </form>
+        </div>
+
+        <div class="form-container" id="signup-container">
+            <h2>Sign Up</h2>
+            <form action="/" method="POST">
+                <label for="signup-username">Username</label>
+                <input type="text" id="signup-username" name="username" required>
+                <label for="signup-email">Email</label>
+                <input type="email" id="signup-email" name="email" required>
+                <label for="signup-password">Password</label>
+                <input type="password" id="signup-password" name="password" required>
+                <label for="signup-phone">Phone Number</label>
+                <input type="tel" id="signup-phone" name="phone" required>
+                <button type="submit" name="signup">Sign Up</button>
+            </form>
+        </div>
+
+        <div class="toggle-buttons">
+            <button class="active" onclick="toggleForm('signin')">Sign In</button>
+            <button onclick="toggleForm('signup')">Sign Up</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleForm(form) {
+            document.getElementById('signin-container').classList.remove('active');
+            document.getElementById('signup-container').classList.remove('active');
+
+            if (form === 'signin') {
+                document.getElementById('signin-container').classList.add('active');
+                document.querySelector('.toggle-buttons button:nth-child(1)').classList.add('active');
+                document.querySelector('.toggle-buttons button:nth-child(2)').classList.remove('active');
+            } else {
+                document.getElementById('signup-container').classList.add('active');
+                document.querySelector('.toggle-buttons button:nth-child(1)').classList.remove('active');
+                document.querySelector('.toggle-buttons button:nth-child(2)').classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>

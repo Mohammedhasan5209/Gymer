@@ -1,0 +1,304 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Smooth Scroll */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    color: #f4f4f4; /* Light Gray */
+    line-height: 1.6;
+    background: #1a1a1a; /* Sleek Black */
+    overflow-x: hidden;
+}
+
+/* Header */
+header {
+    background: #333333; /* Charcoal Gray */
+    color: #ffffff; /* White */
+    padding: 20px 0 20px 0;
+    text-align: center;
+    margin: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 99%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    border-radius: 20px;
+}
+
+header .logo h1 {
+    margin: 0;
+    font-size: 2.5rem;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    margin-top: 10px;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #ffffff; /* White */
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #dc143c; /* Crimson Red */
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    height: 100vh;
+    background: url('../static/pexels-anush.jpg') center/cover no-repeat;
+    color: #ffffff; /* White */
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.hero video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    animation: fadeIn 2s ease-in-out;
+    z-index: 1;
+    -webkit-text-stroke: 2px black;
+}
+
+.hero p {
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+    animation: fadeIn 2s ease-in-out 0.5s;
+    z-index: 1;
+    -webkit-text-stroke: 0.5px black;
+}
+
+.btn-primary {
+    background: #8b0000; /* Dark Red */
+    color: #ffffff; /* White */
+    padding: 12px 24px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    animation: fadeIn 2s ease-in-out 1s;
+    z-index: 1;
+}
+
+.btn-primary:hover {
+    background: #dc143c; /* Crimson Red */
+    transform: scale(1.05);
+}
+
+/* Parallax Effect */
+.parallax {
+    background-color: #1a1a1a; /* Sleek Black */
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff; /* White */
+    font-size: 2rem;
+}
+
+/* Features Section */
+.features {
+    padding: 60px 20px;
+    text-align: center;
+    background: #333333; /* Charcoal Gray */
+}
+
+.features h2 {
+    margin-bottom: 40px;
+    font-size: 2.2rem;
+    color: #ffffff; /* White */
+    font-weight: 700;
+}
+
+.feature-cards {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 0 20px;
+}
+
+.feature-card {
+    background: #1a1a1a; /* Sleek Black */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    width: 300px;
+    margin: 10px;
+    position: relative;
+    cursor: pointer;
+    animation: fadeInUp 0.6s ease-in-out;
+}
+
+.feature-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: opacity 0.3s ease;
+}
+
+.feature-card-content {
+    padding: 20px;
+    text-align: left;
+}
+
+.feature-card-content h3 {
+    margin: 15px 0;
+    font-size: 1.5rem;
+    color: #dc143c; /* Crimson Red */
+}
+
+.feature-card-content p {
+    font-size: 1rem;
+    color: #f4f4f4; /* Light Gray */
+}
+
+/* Hover Effects */
+.feature-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    transform: translateY(-10px);
+}
+
+.feature-card:hover img {
+    opacity: 0.8;
+}
+
+/* Keyframes for Fade-in and Slide-up Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* About Section */
+.about {
+    padding: 60px 20px;
+    text-align: center;
+    background: #1a1a1a; /* Sleek Black */
+}
+
+.about h2 {
+    margin-bottom: 20px;
+    font-size: 2rem;
+    color: #dc143c; /* Crimson Red */
+}
+
+.about p {
+    font-size: 1.1rem;
+    color: #f4f4f4; /* Light Gray */
+}
+
+/* Contact Section */
+.contact {
+    padding: 60px 20px;
+    text-align: center;
+    background: #333333; /* Charcoal Gray */
+}
+
+.contact h2 {
+    margin-bottom: 20px;
+    font-size: 2rem;
+    color: #dc143c; /* Crimson Red */
+}
+
+.contact p {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.contact form {
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.contact form label {
+    display: block;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    color: #ffffff; /* White */
+}
+
+.contact form input,
+.contact form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+.contact form button {
+    background: #8b0000; /* Dark Red */
+    color: #ffffff; /* White */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.contact form button:hover {
+    background: #dc143c; /* Crimson Red */
+}
+
+/* Footer */
+footer {
+    background: #1a1a1a; /* Sleek Black */
+    color: #ffffff; /* White */
+    text-align: center;
+    padding: 15px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
